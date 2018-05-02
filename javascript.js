@@ -38,12 +38,16 @@ $(document).ready(function () {
         console.log(newTrain.firstTrainTime);
         console.log(newTrain.frequency);
 
+        //Add each train into the table
+
         alert("Train added successfully.");
 
         $("#train-name").val("");
         $("#destination").val("");
         $("#first-train-time").val("");
         $("#frequency").val("");
+
+        //Add variables below that have moment.js ~stuff~ in them as a row into the table. It will automatically run the database.ref function because it's outside of the click function
     })
 
     database.ref().on("child_added", function(childSnapshot, prevChildKey) {
@@ -81,6 +85,10 @@ $(document).ready(function () {
         //Next Train
         var nextTrain = moment().add(minutesUntilTrain, "minutes");
         console.log("NEXT ARRIVAL: " + moment(nextTrain).format("hh:mm"));
+        console.log("NEXT ARRIVAL: " + nextTrain);
+
+        $("#train-table > tbody").append("<tr><td>" + newTrainName + "</td><td>" + newTrainDest + "</td><td>" + moment(nextTrain).format("hh:mm") + "</td><td>" + minutesUntilTrain + "</td></tr>");
+
     })
 
 })
